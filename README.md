@@ -3,7 +3,7 @@ A Maven plugin that generates a class containing all property keys from a proper
 
 ## Getting Started
 
-The project contains a single Mojo linked to generate-sources as default phase.
+The project contains a single Mojo linked to **generate-sources** as default phase.
 
 ### Prerequisites
 
