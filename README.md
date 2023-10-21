@@ -3,11 +3,11 @@ A Maven plugin that generates a class containing all property keys from a proper
 
 ## Getting Started
 
-The project is a single Mojo linked to generate-sources as default phase.
+The project contains a single Mojo linked to generate-sources as default phase.
 
 ### Prerequisites
 
-In order to use the plugin you'll need to clone this project and install it in your Maven repository:
+In order to use the plugin you'll first need to clone this project and install it in your Maven repository:
 
 ```sh
 mvn install
