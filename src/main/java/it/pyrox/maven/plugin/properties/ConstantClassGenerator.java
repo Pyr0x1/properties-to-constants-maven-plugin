@@ -38,7 +38,7 @@ public class ConstantClassGenerator {
 	public void addConstant(String line) {
 		boolean isPropertyLine = false;
 
-		if (line != null && !line.isEmpty() && !line.strip().startsWith("#")) {
+		if (line != null && !line.isEmpty() && !line.trim().startsWith("#")) {
 			String[] splitted = line.split("=");
 			if (splitted.length == 2) {
 				isPropertyLine = true;
