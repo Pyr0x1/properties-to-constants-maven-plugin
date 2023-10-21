@@ -13,6 +13,8 @@ In order to use the plugin you'll first need to clone this project and install i
 mvn install
 ```
 
+Alternatively, you can download the jar from the "relases" section and place it manually under in your repository folder.
+
 ### Instructions
 
 To use the plugin you'll need to add it in your project's pom:
