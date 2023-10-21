@@ -39,7 +39,7 @@ To use the plugin you'll need to add it in your project's pom:
 
 where 
 
-* **sourcePropertyPath** is the path of the property file you want to read
+* **sourcePropertyPath** is the path of the property file you want to read, it should be a subdirectory of *src/main/resources*
 * **destPackageName** is the destination package of the generated class
 * **destClassName** is the generated class name
 
