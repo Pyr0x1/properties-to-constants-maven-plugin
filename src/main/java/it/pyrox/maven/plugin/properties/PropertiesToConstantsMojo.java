@@ -29,17 +29,12 @@ public class PropertiesToConstantsMojo extends AbstractMojo {
 	@Parameter(defaultValue="${project.build.directory}", required = true, readonly = true)
 	private String targetFolder;
 
-    /**
-     * Folder contained in src/main/resources containing the property file we want to consider.
-     */
-	@Parameter(property = "sourceResourcesSubDir", required = false)
-	String sourceResourcesSubDir;
-
 	/**
-     * Name of the property file to consider.
+     * Name of the property file to consider as input under src/main/resources,
+     * for example "string.properties" or "locale/strings.properties" if there are any subdirectories
      */
-	@Parameter(property = "sourcePropertyName", required = true)
-	String sourcePropertyName;
+	@Parameter(property = "sourcePropertyPath", required = true)
+	String sourcePropertyPath;
 
 	/**
      * Package of the generated class.
@@ -56,10 +51,6 @@ public class PropertiesToConstantsMojo extends AbstractMojo {
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		Log log = getLog();
-		// Optional parameter, if not specified use empty string so path concatenation keeps working
-		if (sourceResourcesSubDir == null) {
-			sourceResourcesSubDir = "";
-		}
 		if (resources != null && !resources.isEmpty()) {
 			ConstantClassGenerator generator = createAndPopulateGenerator();
 			if (!generator.isBodyEmpty()) {
@@ -78,7 +69,7 @@ public class PropertiesToConstantsMojo extends AbstractMojo {
 		Log log = getLog();
 		String resourceDirectory = resources.get(0).getDirectory();
 		log.info("Found resource folder at \"" + resourceDirectory + "\"");
-		Path completeSourcePath = Paths.get(resourceDirectory, sourceResourcesSubDir, sourcePropertyName);
+		Path completeSourcePath = Paths.get(resourceDirectory, sourcePropertyPath);
 		ConstantClassGenerator generator = new ConstantClassGenerator(destPackageName, destClassName);
 
 		try (Scanner scanner = new Scanner(completeSourcePath)) {
@@ -101,6 +92,7 @@ public class PropertiesToConstantsMojo extends AbstractMojo {
 		Path destinationPath = Paths.get(targetFolder, "generated-sources", convertPackageToDirTree(destPackageName));
 		try {
 			Files.createDirectories(destinationPath);
+			log.info("Created directory tree at \"" + destinationPath.toString() + "\"");
 		} catch (Exception e) {
 			log.error("Error while generating directories with path \"" + destinationPath.toString() + "\"");
 		}
